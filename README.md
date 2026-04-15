@@ -1,9 +1,5 @@
 # TrustCert-SCVul
 
-**Selective Interpretable Smart Contract Vulnerability Triage**
-
-Code for the paper: *TrustCert-SCVul: Selective Interpretable Smart Contract Vulnerability Triage* (BlockSys 2026).
-
 ## Overview
 
 TrustCert-SCVul is an interpretable selective triage pipeline for smart contract vulnerabilities. It combines structural Solidity features with real Slither analyzer signals through per-vulnerability Explainable Boosting Machines (EBMs), then applies split conformal prediction to abstain on uncertain inputs. Each accepted prediction is documented in a reproducible evidence record with Merkle-batched hashing.
@@ -102,26 +98,6 @@ Produces:
 - `artifacts/abstention_baselines.csv` — Multi-alpha conformal comparison across 4 models
 - `artifacts/case_studies.json` — EBM local explanations for TP and abstained contracts
 
-### Generate Figures
-
-```bash
-python scripts/make_figures.py
-```
-
-Generates publication-quality PDF figures in `figures/`:
-- `fig_grouped_cv.pdf` — F1 and acceptance rate with error bars
-- `fig_per_fold_heatmap.pdf` — Per-fold acceptance heatmap
-- `fig_local_contribs.pdf` — EBM local waterfall (TP + abstained)
-- `fig_abstention_bench.pdf` — Model-agnostic abstention comparison
-
-## Method
-
-### Pipeline
-
-```
-Solidity Source → Feature Extraction (40 structural + Slither) → Per-Vuln EBM
-→ Conformal Calibrator → Accept (+ Evidence Record) / Abstain (→ Human Review)
-```
 
 ### Key Components
 
@@ -140,19 +116,4 @@ Solidity Source → Feature Extraction (40 structural + Slither) → Per-Vuln EB
 | SmartBugs-Curated | 109 | Ground-truth | Expert-annotated |
 | SmartBugs-Wild | 47,398 (200 sampled) | Ethereum mainnet | Slither silver labels |
 
-## Citation
 
-```bibtex
-@inproceedings{trustcert2026,
-  title     = {TrustCert-SCVul: Selective Interpretable Smart Contract Vulnerability Triage},
-  author    = {Anonymous},
-  booktitle = {Proceedings of BlockSys 2026},
-  year      = {2026},
-  series    = {LNCS},
-  publisher = {Springer}
-}
-```
-
-## License
-
-MIT License
